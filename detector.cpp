@@ -5,7 +5,7 @@
 
 
 void Usage(char *filename) {
-	printf("Usage: %s <file> <string>\n", filename);
+	printf("Usage: %s <file> \n", filename);
 }
 
 
