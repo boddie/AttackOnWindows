@@ -4,12 +4,9 @@
 #include <fstream>
 #include <sys/stat.h>
 
-
 void Usage(char *filename) {
 	printf("Usage: %s <file> \n", filename);
 }
-
-
 
 int Search_in_File(char *fname) {
 	struct stat results;
@@ -20,7 +17,6 @@ int Search_in_File(char *fname) {
 	else
 		return(-1);
 
-//	char temp[1024 * 1024];
 	char * temp;
 	temp = new char [size];
 
@@ -34,7 +30,6 @@ int Search_in_File(char *fname) {
                 in.read (buffer, buffer_size);
                 if(in)
                 {
-                       // printf("%s", buffer);
 			if (buffer[0] != 0)
 				temp[i++] = buffer[0];
 			else
@@ -42,7 +37,6 @@ int Search_in_File(char *fname) {
                 }
         }
         in.close();
-	//printf("\n%s\n", temp);
 
 	if((strstr(temp, "UPX!")) != NULL)
 	{
@@ -57,7 +51,6 @@ int Search_in_File(char *fname) {
 //	        printf("rsrc Found in binary\n");
 //	}
 	printf("finished searching file\n");
-	//printf("\n%s\n", temp);
 	return(0);
 }
 
