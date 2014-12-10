@@ -2,6 +2,7 @@
 #include<stdlib.h>
 #include<string.h>
 #include <fstream>
+#include <sys/stat.h>
 
 
 void Usage(char *filename) {
@@ -11,7 +12,17 @@ void Usage(char *filename) {
 
 
 int Search_in_File(char *fname) {
-	char temp[1024 * 1024];
+	struct stat results;
+	int size = 0;
+
+	if (stat(fname, &results) == 0)
+		size = results.st_size;
+	else
+		return(-1);
+
+//	char temp[1024 * 1024];
+	char * temp;
+	temp = new char [size];
 
 	std::ifstream in(fname, std::ios::in | std::ios::binary);
 
@@ -41,13 +52,13 @@ int Search_in_File(char *fname) {
 	{
 		printf("UPX not found in binary\n");
 	}
-	if((strstr(temp, "rsrc")) != NULL)
-        {
-	        printf("rsrc Found in binary\n");
-	}
+//	if((strstr(temp, "rsrc")) != NULL)
+//      {
+//	        printf("rsrc Found in binary\n");
+//	}
 	printf("finished searching file\n");
 	//printf("\n%s\n", temp);
-	return 0;
+	return(0);
 }
 
 int main(int argc, char *argv[]) {
